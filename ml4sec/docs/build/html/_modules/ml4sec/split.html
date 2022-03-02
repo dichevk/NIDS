@@ -1,0 +1,475 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ml4sec.split &mdash; ML4sec 2020 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> ML4sec
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ML4sec</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../ml4sec.html">ml4sec</a> &raquo;</li>
+        
+      <li>ml4sec.split</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for ml4sec.split</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1">################################################################################</span>
+<span class="c1">#                                    Split                                     #</span>
+<span class="c1">################################################################################</span>
+
+<span class="k">def</span> <span class="nf">split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">apps_train</span><span class="p">,</span> <span class="n">apps_test</span><span class="p">,</span> <span class="n">ratio</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Extract features from each flow. Must be implemented by the students.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        data : np.array of shape=(n_flows, n_features)</span>
+<span class="sd">            Data for which to produce a split.</span>
+
+<span class="sd">        labels : np.array of shape=(n_flows,)</span>
+<span class="sd">            Labels corresponding to the data.</span>
+
+<span class="sd">        apps_train : list()</span>
+<span class="sd">            List of apps to use for training.</span>
+
+<span class="sd">        apps_test : list()</span>
+<span class="sd">            List of apps to use for testing.</span>
+
+<span class="sd">        ratio : float</span>
+<span class="sd">            Ratio of data for training apps to use for training.</span>
+<span class="sd">            The rest should be used for testing.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        X_train : array-like of shape=(n_flows_train, n_features)</span>
+<span class="sd">            Datapoints selected for training.</span>
+
+<span class="sd">        y_train : array-like of shape=(n_flows_train,)</span>
+<span class="sd">            Corresponding labels selected for training.</span>
+
+<span class="sd">        X_test : array-like of shape=(n_flows_test, n_features)</span>
+<span class="sd">            Datapoints selected for testing.</span>
+
+<span class="sd">        y_test : array-like of shape=(n_flows_test,)</span>
+<span class="sd">            Corresponding labels selected for testing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+        <span class="s2">&quot;You will need to implement the &#39;split()&#39; function yourself.&quot;</span>
+    <span class="p">)</span>
+
+
+
+<span class="k">def</span> <span class="nf">get_split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">apps_train</span><span class="p">,</span> <span class="n">ratio</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the split of &#39;benign.csv&#39; file for a given input.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        apps_train : list()</span>
+<span class="sd">            Apps to use in the training set, all apps not in apps_train will be</span>
+<span class="sd">            used only for the testing set.</span>
+
+<span class="sd">        ratio : float</span>
+<span class="sd">            Ratio of datapoints for apps in app_train to use for training.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        X_train : array-like of shape=(n_samples_train, n_features)</span>
+<span class="sd">            Datapoints used for training.</span>
+
+<span class="sd">        y_train : array-like of shape=(n_samples_train,)</span>
+<span class="sd">            Labels corresponding to training data.</span>
+<span class="sd">            +1 if the corresponding app is     in the training dataset,</span>
+<span class="sd">            -1 if the corresponding app is not in the training dataset,</span>
+<span class="sd">            I.e., all values are +1.</span>
+
+<span class="sd">        X_test : array-like of shape=(n_samples_test, n_features)</span>
+<span class="sd">            Datapoints used for testing.</span>
+
+<span class="sd">        y_test : array-like of shape=(n_samples_test,)</span>
+<span class="sd">            Labels corresponding to testing data.</span>
+<span class="sd">            +1 if the corresponding app is     in the training dataset,</span>
+<span class="sd">            -1 if the corresponding app is not in the training dataset.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="c1"># Get relevant data and labels</span>
+    <span class="n">data</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">flows_benign</span><span class="p">))</span>
+    <span class="n">labels</span>     <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">labels_benign</span>
+
+    <span class="c1"># Compute apps in test set</span>
+    <span class="n">apps_test</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">labels</span><span class="p">)))</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">apps_train</span><span class="p">))</span>
+
+    <span class="c1"># Execute split</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
+        <span class="n">data</span>       <span class="o">=</span> <span class="n">data</span><span class="p">,</span>
+        <span class="n">labels</span>     <span class="o">=</span> <span class="n">labels</span><span class="p">,</span>
+        <span class="n">apps_train</span> <span class="o">=</span> <span class="n">apps_train</span><span class="p">,</span>
+        <span class="n">apps_test</span>  <span class="o">=</span> <span class="n">apps_test</span><span class="p">,</span>
+        <span class="n">ratio</span>      <span class="o">=</span> <span class="n">ratio</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Transform labels to -1/+1 depending on whether they are inside (+1)</span>
+    <span class="c1"># or outside (-1) of the training set</span>
+    <span class="n">y_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">y_test</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">apps_train</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="c1"># Return result</span>
+    <span class="k">return</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span>
+
+
+<span class="c1">################################################################################</span>
+<span class="c1">#                                 Test methods                                 #</span>
+<span class="c1">################################################################################</span>
+
+<span class="k">def</span> <span class="nf">test_split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Executes several test cases for splitting the data.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        verbose : boolean, default=False</span>
+<span class="sd">            If True, print tests that are executed.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="c1"># Select data</span>
+    <span class="n">data</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">flows_benign</span><span class="p">))</span>
+    <span class="n">labels</span>     <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">labels_benign</span>
+
+    <span class="c1"># Test cases</span>
+    <span class="n">all_apps_train</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="s1">&#39;Anti Virus&#39;</span><span class="p">,</span> <span class="s1">&#39;Chrome&#39;</span><span class="p">,</span> <span class="s1">&#39;DNS Server&#39;</span><span class="p">,</span> <span class="s1">&#39;Excel&#39;</span><span class="p">,</span> <span class="s1">&#39;Firefox&#39;</span><span class="p">,</span> <span class="s1">&#39;Git&#39;</span><span class="p">,</span> <span class="s1">&#39;IntelliJ&#39;</span><span class="p">],</span>
+        <span class="p">[</span><span class="s1">&#39;Anti Virus&#39;</span><span class="p">,</span> <span class="s1">&#39;Outlook&#39;</span><span class="p">,</span> <span class="s1">&#39;DNS Server&#39;</span><span class="p">,</span> <span class="s1">&#39;Excel&#39;</span><span class="p">,</span> <span class="s1">&#39;Firefox&#39;</span><span class="p">,</span> <span class="s1">&#39;Git&#39;</span><span class="p">,</span> <span class="s1">&#39;IntelliJ&#39;</span><span class="p">,</span> <span class="s1">&#39;PowerPoint&#39;</span><span class="p">,</span> <span class="s1">&#39;Thunderbird&#39;</span><span class="p">,</span> <span class="s1">&#39;Web Server&#39;</span><span class="p">,</span> <span class="s1">&#39;Word&#39;</span><span class="p">],</span>
+        <span class="p">[</span><span class="s1">&#39;IntelliJ&#39;</span><span class="p">,</span> <span class="s1">&#39;PowerPoint&#39;</span><span class="p">,</span> <span class="s1">&#39;Thunderbird&#39;</span><span class="p">,</span> <span class="s1">&#39;Web Server&#39;</span><span class="p">,</span> <span class="s1">&#39;Word&#39;</span><span class="p">],</span>
+        <span class="p">[</span><span class="s1">&#39;IntelliJ&#39;</span><span class="p">,</span> <span class="s1">&#39;PowerPoint&#39;</span><span class="p">,</span> <span class="s1">&#39;Thunderbird&#39;</span><span class="p">,</span> <span class="s1">&#39;Web Server&#39;</span><span class="p">,</span> <span class="s1">&#39;Word&#39;</span><span class="p">,</span> <span class="s1">&#39;Mail Server&#39;</span><span class="p">,</span> <span class="s1">&#39;Chrome&#39;</span><span class="p">,</span> <span class="s1">&#39;Anti Virus&#39;</span><span class="p">,</span> <span class="s1">&#39;Outlook&#39;</span><span class="p">,</span> <span class="s1">&#39;DNS Server&#39;</span><span class="p">,</span> <span class="s1">&#39;Excel&#39;</span><span class="p">,</span> <span class="s1">&#39;Firefox&#39;</span><span class="p">,</span> <span class="s1">&#39;Git&#39;</span><span class="p">],</span>
+        <span class="p">[],</span>
+    <span class="p">]</span>
+
+    <span class="n">all_apps_test</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="s1">&#39;Mail Server&#39;</span><span class="p">,</span> <span class="s1">&#39;Outlook&#39;</span><span class="p">,</span> <span class="s1">&#39;PowerPoint&#39;</span><span class="p">,</span> <span class="s1">&#39;Thunderbird&#39;</span><span class="p">,</span> <span class="s1">&#39;Web Server&#39;</span><span class="p">,</span> <span class="s1">&#39;Word&#39;</span><span class="p">],</span>
+        <span class="p">[</span><span class="s1">&#39;Mail Server&#39;</span><span class="p">,</span> <span class="s1">&#39;Chrome&#39;</span><span class="p">],</span>
+        <span class="p">[</span><span class="s1">&#39;Mail Server&#39;</span><span class="p">,</span> <span class="s1">&#39;Chrome&#39;</span><span class="p">,</span> <span class="s1">&#39;Anti Virus&#39;</span><span class="p">,</span> <span class="s1">&#39;Outlook&#39;</span><span class="p">,</span> <span class="s1">&#39;DNS Server&#39;</span><span class="p">,</span> <span class="s1">&#39;Excel&#39;</span><span class="p">,</span> <span class="s1">&#39;Firefox&#39;</span><span class="p">,</span> <span class="s1">&#39;Git&#39;</span><span class="p">],</span>
+        <span class="p">[],</span>
+        <span class="p">[</span><span class="s1">&#39;IntelliJ&#39;</span><span class="p">,</span> <span class="s1">&#39;PowerPoint&#39;</span><span class="p">,</span> <span class="s1">&#39;Thunderbird&#39;</span><span class="p">,</span> <span class="s1">&#39;Web Server&#39;</span><span class="p">,</span> <span class="s1">&#39;Word&#39;</span><span class="p">,</span> <span class="s1">&#39;Mail Server&#39;</span><span class="p">,</span> <span class="s1">&#39;Chrome&#39;</span><span class="p">,</span> <span class="s1">&#39;Anti Virus&#39;</span><span class="p">,</span> <span class="s1">&#39;Outlook&#39;</span><span class="p">,</span> <span class="s1">&#39;DNS Server&#39;</span><span class="p">,</span> <span class="s1">&#39;Excel&#39;</span><span class="p">,</span> <span class="s1">&#39;Firefox&#39;</span><span class="p">,</span> <span class="s1">&#39;Git&#39;</span><span class="p">],</span>
+    <span class="p">]</span>
+
+    <span class="n">all_ratios</span>   <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
+    <span class="n">all_expected</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4210</span><span class="p">,</span> <span class="mi">8786</span><span class="p">,</span> <span class="mi">784</span><span class="p">,</span> <span class="mi">11330</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">case</span><span class="p">,</span> <span class="p">(</span><span class="n">apps_train</span><span class="p">,</span> <span class="n">apps_test</span><span class="p">,</span> <span class="n">ratio</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
+            <span class="nb">zip</span><span class="p">(</span><span class="n">all_apps_train</span><span class="p">,</span> <span class="n">all_apps_test</span><span class="p">,</span> <span class="n">all_ratios</span><span class="p">,</span> <span class="n">all_expected</span><span class="p">)</span>
+        <span class="p">):</span>
+        <span class="c1"># Print test case</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test case </span><span class="si">{}</span><span class="s2"> - benign.csv:&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">case</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;apps_train = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">apps_train</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;apps_test  = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">apps_test</span> <span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ratio      = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ratio</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">()</span>
+
+        <span class="c1"># Execute split</span>
+        <span class="n">data_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">data_test</span><span class="p">,</span> <span class="n">labels_test</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
+            <span class="n">data</span>       <span class="o">=</span> <span class="n">data</span><span class="p">,</span>
+            <span class="n">labels</span>     <span class="o">=</span> <span class="n">labels</span><span class="p">,</span>
+            <span class="n">apps_train</span> <span class="o">=</span> <span class="n">apps_train</span><span class="p">,</span>
+            <span class="n">apps_test</span>  <span class="o">=</span> <span class="n">apps_test</span><span class="p">,</span>
+            <span class="n">ratio</span>      <span class="o">=</span> <span class="n">ratio</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Test results</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assert_split</span><span class="p">(</span>
+            <span class="n">original_data</span>          <span class="o">=</span> <span class="n">data</span><span class="p">,</span>
+            <span class="n">original_labels</span>        <span class="o">=</span> <span class="n">labels</span><span class="p">,</span>
+            <span class="n">data_train</span>             <span class="o">=</span> <span class="n">data_train</span><span class="p">,</span>
+            <span class="n">labels_train</span>           <span class="o">=</span> <span class="n">labels_train</span><span class="p">,</span>
+            <span class="n">data_test</span>              <span class="o">=</span> <span class="n">data_test</span><span class="p">,</span>
+            <span class="n">labels_test</span>            <span class="o">=</span> <span class="n">labels_test</span><span class="p">,</span>
+            <span class="n">expected_samples_train</span> <span class="o">=</span> <span class="n">expected</span><span class="p">,</span>
+            <span class="n">apps_test</span>              <span class="o">=</span> <span class="n">apps_test</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Confirm that all cases passed</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All test cases passed.&quot;</span><span class="p">)</span>
+
+
+
+<span class="k">def</span> <span class="nf">assert_split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">original_data</span><span class="p">,</span> <span class="n">original_labels</span><span class="p">,</span>
+                 <span class="n">data_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">data_test</span><span class="p">,</span> <span class="n">labels_test</span><span class="p">,</span>
+                 <span class="n">expected_samples_train</span><span class="p">,</span> <span class="n">apps_test</span>
+    <span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Tests whether the split is correct.</span>
+<span class="sd">        If an incorrect split is found, it raises an error with a suggestion for</span>
+<span class="sd">        the students to debug their code.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        original_data : np.array of shape=(n_samples, n_features)</span>
+<span class="sd">            Original data before split.</span>
+
+<span class="sd">        original_labels : np.array of shape=(n_samples, n_features)</span>
+<span class="sd">            Original labels before split.</span>
+
+<span class="sd">        data_train : np.array of shape=(n_samples_train, n_features)</span>
+<span class="sd">            Data selected for training.</span>
+
+<span class="sd">        labels_train : np.array of shape=(n_samples_train,)</span>
+<span class="sd">            Corresponding labels selected for training.</span>
+
+<span class="sd">        data_test : np.array of shape=(n_samples_test, n_features)</span>
+<span class="sd">            Data selected for testing.</span>
+
+<span class="sd">        labels_test : np.array of shape=(n_samples_test,)</span>
+<span class="sd">            Corresponding labels selected for testing.</span>
+
+<span class="sd">        expected_samples_train : int</span>
+<span class="sd">            Number of samples expected to be in training.</span>
+
+<span class="sd">        apps_test : list</span>
+<span class="sd">            List of apps that should only appear in testing dataset.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="c1"># Try casting</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">data_train</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data_train</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">labels_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">labels_train</span><span class="p">)</span>
+        <span class="n">data_test</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data_test</span> <span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">labels_test</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">labels_test</span> <span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Output could not be cast to array: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+
+    <span class="c1"># Check if apps in original are same as in train+test</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">original_labels</span><span class="p">)</span> <span class="o">==</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">labels_train</span><span class="p">,</span> <span class="n">labels_test</span><span class="p">)))</span>
+           <span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Labels in train and test were different from original.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Check if apps in original are same as in train+test</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">labels_train</span><span class="p">,</span> <span class="n">apps_test</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Training data contains test labels.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Check if number of train datapoints and labels correspond</span>
+    <span class="k">if</span> <span class="n">data_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">labels_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Number of train datapoints is not equal to number of train labels.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Check if number of test datapoints and labels correspond</span>
+    <span class="k">if</span> <span class="n">data_test</span> <span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">labels_test</span> <span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Number of test datapoints is not equal to number of test labels.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Check if number of train+test datapoints equals original</span>
+    <span class="k">if</span> <span class="n">data_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">data_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">original_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Train data + test data != original data.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Check if number of features is equal to original</span>
+    <span class="k">if</span>  <span class="n">data_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">data_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span>\
+        <span class="n">data_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">original_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;A different number of features was returned.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Check if labels only has single dimension</span>
+    <span class="k">if</span> <span class="n">labels_train</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">labels_test</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Labels should have one dimension.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Check if number of train datapoints is expected</span>
+    <span class="k">if</span> <span class="n">data_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">expected_samples_train</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Number of training datapoints should be &#39;</span><span class="si">{}</span><span class="s2">&#39;, but was &#39;</span><span class="si">{}</span><span class="s2">&#39;. Hint: &quot;</span>
+            <span class="s2">&quot;if you are off by 1, try to round the ratio instead of taking the &quot;</span>
+            <span class="s2">&quot;floor or ceiling value.&quot;</span>
+            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">data_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">expected_samples_train</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="n">expected_test</span> <span class="o">=</span> <span class="n">original_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">expected_samples_train</span>
+    <span class="c1"># Check if number of test datapoints is expected</span>
+    <span class="k">if</span> <span class="n">data_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">expected_test</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Number of testing datapoints should be &#39;</span><span class="si">{}</span><span class="s2">&#39;, but was &#39;</span><span class="si">{}</span><span class="s2">&#39;. Hint: &quot;</span>
+            <span class="s2">&quot;if you are off by 1, try to round the ratio instead of taking the &quot;</span>
+            <span class="s2">&quot;floor or ceiling value.&quot;</span>
+            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">data_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">expected_test</span><span class="p">)</span>
+        <span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Thijs van Ede
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

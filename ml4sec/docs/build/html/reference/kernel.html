@@ -1,0 +1,295 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Kernel functions &mdash; ML4sec 2020 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Split data" href="split.html" />
+    <link rel="prev" title="Scale features" href="scale.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> ML4sec
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="reference.html">Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="reference.html#assignment">Assignment</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="load.html">Load data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extract.html">Extract features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scale.html">Scale features</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Kernel functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#plotting">Plotting</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="split.html">Split data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metrics.html">Metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="submit.html">Submit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ML4sec</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="reference.html">Reference</a> &raquo;</li>
+        
+      <li>Kernel functions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/reference/kernel.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="kernel-functions">
+<h1>Kernel functions<a class="headerlink" href="#kernel-functions" title="Permalink to this headline">¶</a></h1>
+<p>For a given kernel and support vectors we compute the <code class="docutils literal notranslate"><span class="pre">soft_score</span></code> that computes the overall <code class="docutils literal notranslate"><span class="pre">score</span></code> of a point <code class="docutils literal notranslate"><span class="pre">X</span></code> by summing the <code class="docutils literal notranslate"><span class="pre">kernel_scores</span></code> of the point <code class="docutils literal notranslate"><span class="pre">X</span></code> with each support vector <code class="docutils literal notranslate"><span class="pre">Y</span></code>.</p>
+<dl class="py method">
+<dt id="ml4sec.Assignment.soft_score">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">soft_score</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span></em>, <em class="sig-param"><span class="n">Y</span></em>, <em class="sig-param"><span class="n">K</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.soft_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the soft score by computing the kernel function
+between each point and each support_vector.
+The scores are then added to create a soft score.
+Note that this function is not weighted, in reality
+weights are added to adjust the importance of each
+support vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>np.array of shape=</em><em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Points for which to compute the soft score.</p></li>
+<li><p><strong>Y</strong> (<em>np.array of shape=</em><em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Support vectors used to compute the score.</p></li>
+<li><p><strong>K</strong> (<em>func</em>) – Kernel function to compute each individual score.</p></li>
+<li><p><strong>**kwargs</strong> (<em>optional</em>) – Optional arguments for the kernel.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>result</strong> – Soft score for each point in X.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array of shape=(n_samples,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="section" id="plotting">
+<h2>Plotting<a class="headerlink" href="#plotting" title="Permalink to this headline">¶</a></h2>
+<p>To show how this works, we plot the kernel score of randomly generated <code class="docutils literal notranslate"><span class="pre">support_vectors</span></code> for all combinations of parameters <code class="docutils literal notranslate"><span class="pre">sigmas</span></code> and <code class="docutils literal notranslate"><span class="pre">thresholds</span></code> using the following methods:</p>
+<dl class="py method">
+<dt id="ml4sec.Assignment.plot_kernels">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">plot_kernels</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">K</span></em>, <em class="sig-param"><span class="n">sigmas</span><span class="o">=</span><span class="default_value">[None]</span></em>, <em class="sig-param"><span class="n">thresholds</span><span class="o">=</span><span class="default_value">[None]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.plot_kernels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot an example of randomly generated kernels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>K</strong> (<em>func</em>) – Kernel function to compute each individual score.</p></li>
+<li><p><strong>sigmas</strong> (<em>list</em><em>, </em><em>default=</em><em>[</em><em>None</em><em>]</em>) – List of different values of sigma to plot.</p></li>
+<li><p><strong>thresholds</strong> (<em>list</em><em>, </em><em>default=</em><em>[</em><em>None</em><em>]</em>) – List of different thresholds to plot.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ml4sec.Assignment._plot_kernel_">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">_plot_kernel_</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ax</span></em>, <em class="sig-param"><span class="n">support_vectors</span></em>, <em class="sig-param"><span class="n">K</span></em>, <em class="sig-param"><span class="n">threshold</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment._plot_kernel_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to plot scores and decision boundary for given support vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>support_vectors</strong> (<em>np.array of shape=</em><em>(</em><em>n_vectors</em><em>, </em><em>n_features</em><em>)</em>) – Support vectors for which to plot the soft score.</p></li>
+<li><p><strong>K</strong> (<em>func</em>) – Kernel function to compute the soft scores.</p></li>
+<li><p><strong>threshold</strong> (<em>float</em><em>, </em><em>default=2</em>) – Decision threshold.
+All scores higher than this threshold will be inside the model.
+All scores lower than this threshold will are anomalous.</p></li>
+<li><p><strong>**kwargs</strong> (<em>optional</em>) – Optional arguments to give to the kernel function K.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="split.html" class="btn btn-neutral float-right" title="Split data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="scale.html" class="btn btn-neutral float-left" title="Scale features" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Thijs van Ede
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

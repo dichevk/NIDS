@@ -1,0 +1,338 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Split data &mdash; ML4sec 2020 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Metrics" href="metrics.html" />
+    <link rel="prev" title="Kernel functions" href="kernel.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> ML4sec
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="reference.html">Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="reference.html#assignment">Assignment</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="load.html">Load data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extract.html">Extract features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scale.html">Scale features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kernel.html">Kernel functions</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Split data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#test">Test</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="metrics.html">Metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="submit.html">Submit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ML4sec</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="reference.html">Reference</a> &raquo;</li>
+        
+      <li>Split data</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/reference/split.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="split-data">
+<h1>Split data<a class="headerlink" href="#split-data" title="Permalink to this headline">¶</a></h1>
+<p>Students need to split the data by implementing the <code class="docutils literal notranslate"><span class="pre">split()</span></code> method.
+This takes as input the <code class="docutils literal notranslate"><span class="pre">data</span></code> that needs to be split, together with its corresponding <code class="docutils literal notranslate"><span class="pre">labels</span></code>.
+The split is based on three parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">apps_train</span></code> specifies the apps used for both training and testing. The given <code class="docutils literal notranslate"><span class="pre">ratio</span></code> of flows for these apps should be in <code class="docutils literal notranslate"><span class="pre">data_train</span></code> and <code class="docutils literal notranslate"><span class="pre">1-ratio</span></code> of flows for these apps should be in <code class="docutils literal notranslate"><span class="pre">data_test</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">apps_test</span></code>  specifies the apps used <cite>only</cite> for testing, all flows of these apps should be in the resulting <code class="docutils literal notranslate"><span class="pre">data_test</span></code> and no flows flows of these apps should be in the resulting <code class="docutils literal notranslate"><span class="pre">data_train</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ratio</span></code> specifies the ratio of flows from <code class="docutils literal notranslate"><span class="pre">apps_train</span></code> that should be in <code class="docutils literal notranslate"><span class="pre">data_train</span></code>. The remaining flows should be in <code class="docutils literal notranslate"><span class="pre">data_test</span></code>.</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Students may expect that an app <code class="docutils literal notranslate"><span class="pre">A</span></code> is specified in either the <code class="docutils literal notranslate"><span class="pre">apps_train</span></code> or <code class="docutils literal notranslate"><span class="pre">apps_test</span></code> but not both. I.e., the union of <code class="docutils literal notranslate"><span class="pre">apps_train</span></code> and <code class="docutils literal notranslate"><span class="pre">apps_test</span></code> is the complete set of apps and the intersection of <code class="docutils literal notranslate"><span class="pre">apps_train</span></code> and <code class="docutils literal notranslate"><span class="pre">apps_test</span></code> is empty.</p>
+</div>
+<dl class="py method">
+<dt id="ml4sec.Assignment.split">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">split</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">labels</span></em>, <em class="sig-param"><span class="n">apps_train</span></em>, <em class="sig-param"><span class="n">apps_test</span></em>, <em class="sig-param"><span class="n">ratio</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.split" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract features from each flow. Must be implemented by the students.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>np.array of shape=</em><em>(</em><em>n_flows</em><em>, </em><em>n_features</em><em>)</em>) – Data for which to produce a split.</p></li>
+<li><p><strong>labels</strong> (<em>np.array of shape=</em><em>(</em><em>n_flows</em><em>,</em><em>)</em>) – Labels corresponding to the data.</p></li>
+<li><p><strong>apps_train</strong> (<em>list</em><em>(</em><em>)</em>) – List of apps to use for training.</p></li>
+<li><p><strong>apps_test</strong> (<em>list</em><em>(</em><em>)</em>) – List of apps to use for testing.</p></li>
+<li><p><strong>ratio</strong> (<em>float</em>) – Ratio of data for training apps to use for training.
+The rest should be used for testing.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>X_train</strong> (<em>array-like of shape=(n_flows_train, n_features)</em>) – Datapoints selected for training.</p></li>
+<li><p><strong>y_train</strong> (<em>array-like of shape=(n_flows_train,)</em>) – Corresponding labels selected for training.</p></li>
+<li><p><strong>X_test</strong> (<em>array-like of shape=(n_flows_test, n_features)</em>) – Datapoints selected for testing.</p></li>
+<li><p><strong>y_test</strong> (<em>array-like of shape=(n_flows_test,)</em>) – Corresponding labels selected for testing.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>We automatically apply the split on the data from <code class="docutils literal notranslate"><span class="pre">benign.csv</span></code> for a given <code class="docutils literal notranslate"><span class="pre">apps_train</span></code> (which automatically computes the <code class="docutils literal notranslate"><span class="pre">apps_test</span></code>) and a given <code class="docutils literal notranslate"><span class="pre">ratio</span></code>.</p>
+<dl class="py method">
+<dt id="ml4sec.Assignment.get_split">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">get_split</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">apps_train</span></em>, <em class="sig-param"><span class="n">ratio</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.get_split" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the split of ‘benign.csv’ file for a given input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>apps_train</strong> (<em>list</em><em>(</em><em>)</em>) – Apps to use in the training set, all apps not in apps_train will be
+used only for the testing set.</p></li>
+<li><p><strong>ratio</strong> (<em>float</em>) – Ratio of datapoints for apps in app_train to use for training.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>X_train</strong> (<em>array-like of shape=(n_samples_train, n_features)</em>) – Datapoints used for training.</p></li>
+<li><p><strong>y_train</strong> (<em>array-like of shape=(n_samples_train,)</em>) – Labels corresponding to training data.
++1 if the corresponding app is     in the training dataset,
+-1 if the corresponding app is not in the training dataset,
+I.e., all values are +1.</p></li>
+<li><p><strong>X_test</strong> (<em>array-like of shape=(n_samples_test, n_features)</em>) – Datapoints used for testing.</p></li>
+<li><p><strong>y_test</strong> (<em>array-like of shape=(n_samples_test,)</em>) – Labels corresponding to testing data.
++1 if the corresponding app is     in the training dataset,
+-1 if the corresponding app is not in the training dataset.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="section" id="test">
+<h2>Test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h2>
+<p>We provide some test cases for students to check their implementation of <code class="docutils literal notranslate"><span class="pre">split()</span></code>. The <code class="docutils literal notranslate"><span class="pre">test_split</span></code> method runs each test case and <code class="docutils literal notranslate"><span class="pre">assert_split</span></code> checks whether each test case is correct.</p>
+<dl class="py method">
+<dt id="ml4sec.Assignment.test_split">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">test_split</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.test_split" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes several test cases for splitting the data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>verbose</strong> (<em>boolean</em><em>, </em><em>default=False</em>) – If True, print tests that are executed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ml4sec.Assignment.assert_split">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">assert_split</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">original_data</span></em>, <em class="sig-param"><span class="n">original_labels</span></em>, <em class="sig-param"><span class="n">data_train</span></em>, <em class="sig-param"><span class="n">labels_train</span></em>, <em class="sig-param"><span class="n">data_test</span></em>, <em class="sig-param"><span class="n">labels_test</span></em>, <em class="sig-param"><span class="n">expected_samples_train</span></em>, <em class="sig-param"><span class="n">apps_test</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.assert_split" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests whether the split is correct.
+If an incorrect split is found, it raises an error with a suggestion for
+the students to debug their code.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>original_data</strong> (<em>np.array of shape=</em><em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Original data before split.</p></li>
+<li><p><strong>original_labels</strong> (<em>np.array of shape=</em><em>(</em><em>n_samples</em><em>, </em><em>n_features</em><em>)</em>) – Original labels before split.</p></li>
+<li><p><strong>data_train</strong> (<em>np.array of shape=</em><em>(</em><em>n_samples_train</em><em>, </em><em>n_features</em><em>)</em>) – Data selected for training.</p></li>
+<li><p><strong>labels_train</strong> (<em>np.array of shape=</em><em>(</em><em>n_samples_train</em><em>,</em><em>)</em>) – Corresponding labels selected for training.</p></li>
+<li><p><strong>data_test</strong> (<em>np.array of shape=</em><em>(</em><em>n_samples_test</em><em>, </em><em>n_features</em><em>)</em>) – Data selected for testing.</p></li>
+<li><p><strong>labels_test</strong> (<em>np.array of shape=</em><em>(</em><em>n_samples_test</em><em>,</em><em>)</em>) – Corresponding labels selected for testing.</p></li>
+<li><p><strong>expected_samples_train</strong> (<em>int</em>) – Number of samples expected to be in training.</p></li>
+<li><p><strong>apps_test</strong> (<em>list</em>) – List of apps that should only appear in testing dataset.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="metrics.html" class="btn btn-neutral float-right" title="Metrics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="kernel.html" class="btn btn-neutral float-left" title="Kernel functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Thijs van Ede
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

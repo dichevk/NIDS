@@ -1,0 +1,232 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ml4sec &mdash; ML4sec 2020 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> ML4sec
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../reference/reference.html">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ML4sec</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Module code</a> &raquo;</li>
+        
+      <li>ml4sec</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for ml4sec</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="Assignment"><a class="viewcode-back" href="../reference/reference.html#ml4sec.Assignment">[docs]</a><span></span><span class="k">class</span> <span class="nc">Assignment</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Assignment.__init__"><a class="viewcode-back" href="../reference/reference.html#ml4sec.Assignment.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_benign</span><span class="p">,</span> <span class="n">file_unknown</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;ML4sec assignment.</span>
+<span class="sd">            Acts as backend for the ML4sec assignment. We use this to abstract</span>
+<span class="sd">            away some of the functionality to make the assignment less confusing</span>
+<span class="sd">            for students.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            file_benign : string</span>
+<span class="sd">                Path from which to load benign.csv.</span>
+
+<span class="sd">            file_unknown : string</span>
+<span class="sd">                Path from which to load unknown.csv.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Load data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_benign</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_benign</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_unknown</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_unknown</span><span class="p">)</span>
+
+        <span class="c1"># Transform to flows</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flows_benign</span> <span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">labels_benign</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flows</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_benign</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flows_unknown</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">labels_unknown</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flows</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_unknown</span><span class="p">)</span></div>
+
+    <span class="c1"># Import methods</span>
+    <span class="kn">from</span> <span class="nn">.load</span>    <span class="kn">import</span> <span class="n">load</span><span class="p">,</span> <span class="n">flows</span>
+    <span class="kn">from</span> <span class="nn">.extract</span> <span class="kn">import</span> <span class="n">extract</span><span class="p">,</span> <span class="n">feature_matrix</span><span class="p">,</span> <span class="n">show_matrix</span><span class="p">,</span> <span class="n">test_extract</span>
+    <span class="kn">from</span> <span class="nn">.scale</span>   <span class="kn">import</span> <span class="n">scale</span><span class="p">,</span> <span class="n">show_scaled</span><span class="p">,</span> <span class="n">plot_scaled</span><span class="p">,</span> <span class="n">plot_data</span>
+    <span class="kn">from</span> <span class="nn">.kernel</span>  <span class="kn">import</span> <span class="n">soft_score</span><span class="p">,</span> <span class="n">plot_kernels</span><span class="p">,</span> <span class="n">_plot_kernel_</span>
+    <span class="kn">from</span> <span class="nn">.split</span>   <span class="kn">import</span> <span class="n">split</span><span class="p">,</span> <span class="n">get_split</span><span class="p">,</span> <span class="n">test_split</span><span class="p">,</span> <span class="n">assert_split</span>
+    <span class="kn">from</span> <span class="nn">.metrics</span> <span class="kn">import</span> <span class="n">TP</span><span class="p">,</span> <span class="n">TN</span><span class="p">,</span> <span class="n">FP</span><span class="p">,</span> <span class="n">FN</span><span class="p">,</span> <span class="n">TPR</span><span class="p">,</span> <span class="n">TNR</span><span class="p">,</span> <span class="n">FPR</span><span class="p">,</span> <span class="n">FNR</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">,</span> \
+                         <span class="n">precision</span><span class="p">,</span> <span class="n">recall</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">,</span> <span class="n">prediction_report</span><span class="p">,</span> \
+                         <span class="n">show_report</span><span class="p">,</span> <span class="n">test_metrics</span>
+    <span class="kn">from</span> <span class="nn">.submit</span>  <span class="kn">import</span> <span class="n">submit</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Thijs van Ede
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

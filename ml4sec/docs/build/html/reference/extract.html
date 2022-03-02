@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Extract features &mdash; ML4sec 2020 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Scale features" href="scale.html" />
+    <link rel="prev" title="Load data" href="load.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> ML4sec
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="reference.html">Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="reference.html#assignment">Assignment</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="load.html">Load data</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Extract features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scale.html">Scale features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kernel.html">Kernel functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="split.html">Split data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="metrics.html">Metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="submit.html">Submit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ML4sec</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="reference.html">Reference</a> &raquo;</li>
+        
+      <li>Extract features</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/reference/extract.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="extract-features">
+<h1>Extract features<a class="headerlink" href="#extract-features" title="Permalink to this headline">¶</a></h1>
+<p>Students will need to implement their own <code class="docutils literal notranslate"><span class="pre">extract()</span></code> method.
+This method receives the <code class="docutils literal notranslate"><span class="pre">protocol,</span> <span class="pre">src,</span> <span class="pre">sport,</span> <span class="pre">dst,</span> <span class="pre">dport</span></code> values giving information for the entire flow.
+Additionally, the method receives <code class="docutils literal notranslate"><span class="pre">timestamps</span></code> and <code class="docutils literal notranslate"><span class="pre">sizes</span></code>, two <code class="docutils literal notranslate"><span class="pre">np.array</span></code> objects giving the numerical value of the timestamps and packet sizes, respectively.
+In this assignment, the students should extract features from these values and output them as an <code class="docutils literal notranslate"><span class="pre">array-like</span></code> object, e.g., <code class="docutils literal notranslate"><span class="pre">list()</span></code>, <code class="docutils literal notranslate"><span class="pre">np.array()</span></code>, <code class="docutils literal notranslate"><span class="pre">tuple</span></code>.</p>
+<dl class="py method">
+<dt id="ml4sec.Assignment.extract">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">extract</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">protocol</span></em>, <em class="sig-param"><span class="n">src</span></em>, <em class="sig-param"><span class="n">sport</span></em>, <em class="sig-param"><span class="n">dst</span></em>, <em class="sig-param"><span class="n">dport</span></em>, <em class="sig-param"><span class="n">timestamps</span></em>, <em class="sig-param"><span class="n">sizes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.extract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract features from each flow. Must be implemented by the students.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>protocol</strong> (<em>string</em>) – Either ‘TCP’ or ‘UDP’.</p></li>
+<li><p><strong>src</strong> (<em>string</em>) – Source IP address as string.</p></li>
+<li><p><strong>sport</strong> (<em>int</em>) – Source port.</p></li>
+<li><p><strong>dst</strong> (<em>string</em>) – Destination IP address as string.</p></li>
+<li><p><strong>dport</strong> (<em>int</em>) – Destination port.</p></li>
+<li><p><strong>timestamps</strong> (<em>np.array of shape=</em><em>(</em><em>n_packets</em><em>,</em><em>)</em>) – Timestamp for each packet in the flow.</p></li>
+<li><p><strong>sizes</strong> (<em>np.array of shape=</em><em>(</em><em>n_packets</em><em>,</em><em>)</em>) – Size of each packet in the flow.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>features</strong> – Extracted features, determined by the student.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array-like of shape=(n_features,)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>We create a feature matrix using the student implementation of <code class="docutils literal notranslate"><span class="pre">Assignment.extract()</span></code> with the <code class="docutils literal notranslate"><span class="pre">feature_matrix()</span></code> method.
+This method calls the <code class="docutils literal notranslate"><span class="pre">extract()</span></code> method for each flow in the dataset and transforms the output to a numpy array (matrix) of shape=``(n_flows, n_features)``.
+Because of the transformation to a numpy array, the output of <code class="docutils literal notranslate"><span class="pre">extract()</span></code> should be an <code class="docutils literal notranslate"><span class="pre">array-like</span></code> object.</p>
+<dl class="py method">
+<dt id="ml4sec.Assignment.feature_matrix">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">feature_matrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.feature_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the feature matrix for the implemented ‘extract’ method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>iterator</em>) – Iterator over flow-tuple, flow-dataframe.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>feature_matrix</strong> – Feature matrix for given data.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array of shape=(n_flows, n_features)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>We show the feature matrix by transforming the output of <code class="docutils literal notranslate"><span class="pre">Assignment.feature_matrix()</span></code> to a pandas DataFrame, which is automatically displayed nicely in Jupyter Notebook.</p>
+<dl class="py method">
+<dt id="ml4sec.Assignment.show_matrix">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">show_matrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.show_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows the feature matrix for benign flows.</p>
+<ol class="arabic simple">
+<li><p>Extracts the feature matrix</p></li>
+<li><p>Turns it into a pd.DataFrame.</p></li>
+</ol>
+</dd></dl>
+
+<p>The <code class="docutils literal notranslate"><span class="pre">test_extract()</span></code> method loops over a given number of flows, calls the <code class="docutils literal notranslate"><span class="pre">extract()</span></code> method for each flow, and shows the output.
+This method is available for students to test their implementation of <code class="docutils literal notranslate"><span class="pre">extract()</span></code>.</p>
+<dl class="py method">
+<dt id="ml4sec.Assignment.test_extract">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">test_extract</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maximum</span><span class="o">=</span><span class="default_value">inf</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.test_extract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests the extract function implemented by students.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>maximum</strong> (<em>float</em><em>, </em><em>default='inf'</em>) – Maximum number of flows to test.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="scale.html" class="btn btn-neutral float-right" title="Scale features" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="load.html" class="btn btn-neutral float-left" title="Load data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Thijs van Ede
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

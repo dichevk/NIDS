@@ -1,0 +1,418 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Metrics &mdash; ML4sec 2020 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Submit" href="submit.html" />
+    <link rel="prev" title="Split data" href="split.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> ML4sec
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="reference.html">Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="reference.html#assignment">Assignment</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="load.html">Load data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extract.html">Extract features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scale.html">Scale features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kernel.html">Kernel functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="split.html">Split data</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Metrics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#true-false-positive-negatives">True/False Positive/Negatives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#test">Test</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metric-implementations">Metric implementations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#results">Results</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="submit.html">Submit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ML4sec</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="reference.html">Reference</a> &raquo;</li>
+        
+      <li>Metrics</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/reference/metrics.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="metrics">
+<h1>Metrics<a class="headerlink" href="#metrics" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="true-false-positive-negatives">
+<h2>True/False Positive/Negatives<a class="headerlink" href="#true-false-positive-negatives" title="Permalink to this headline">¶</a></h2>
+<p>The methods to compute True/False Positive/Negative values should be implemented by the students.
+To this end, they receive the actual values <code class="docutils literal notranslate"><span class="pre">y_true</span></code> and predicted values <code class="docutils literal notranslate"><span class="pre">y_pred</span></code>, both as a <code class="docutils literal notranslate"><span class="pre">numpy.array</span></code> that are <code class="docutils literal notranslate"><span class="pre">+1</span></code> for known values and <code class="docutils literal notranslate"><span class="pre">-1</span></code> for anomalous values.</p>
+<dl class="py method">
+<dt id="ml4sec.Assignment.TP">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">TP</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y_true</span></em>, <em class="sig-param"><span class="n">y_pred</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.TP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the number of True Positives for given y_true and y_pred.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> (<em>array-like of shape=</em><em>(</em><em>n_samples</em><em>,</em><em>)</em>) – True values corresponding to each prediction.</p></li>
+<li><p><strong>y_pred</strong> (<em>array-like of shape=</em><em>(</em><em>n_samples</em><em>,</em><em>)</em>) – Predicted values corresponding to each true value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>result</strong> – Number of True Positives.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ml4sec.Assignment.TN">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">TN</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y_true</span></em>, <em class="sig-param"><span class="n">y_pred</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.TN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the number of True Negatives for given y_true and y_pred.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> (<em>array-like of shape=</em><em>(</em><em>n_samples</em><em>,</em><em>)</em>) – True values corresponding to each prediction.</p></li>
+<li><p><strong>y_pred</strong> (<em>array-like of shape=</em><em>(</em><em>n_samples</em><em>,</em><em>)</em>) – Predicted values corresponding to each true value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>result</strong> – Number of True Negatives.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ml4sec.Assignment.FP">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">FP</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y_true</span></em>, <em class="sig-param"><span class="n">y_pred</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.FP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the number of False Positives for given y_true and y_pred.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> (<em>array-like of shape=</em><em>(</em><em>n_samples</em><em>,</em><em>)</em>) – True values corresponding to each prediction.</p></li>
+<li><p><strong>y_pred</strong> (<em>array-like of shape=</em><em>(</em><em>n_samples</em><em>,</em><em>)</em>) – Predicted values corresponding to each true value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>result</strong> – Number of False Positives.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ml4sec.Assignment.FN">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">FN</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y_true</span></em>, <em class="sig-param"><span class="n">y_pred</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.FN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the number of False Negatives for given y_true and y_pred.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> (<em>array-like of shape=</em><em>(</em><em>n_samples</em><em>,</em><em>)</em>) – True values corresponding to each prediction.</p></li>
+<li><p><strong>y_pred</strong> (<em>array-like of shape=</em><em>(</em><em>n_samples</em><em>,</em><em>)</em>) – Predicted values corresponding to each true value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>result</strong> – Number of False Negatives.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="test">
+<h2>Test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h2>
+<p>To test the implementations of True/False Positive/Negative values, we provide test cases using the function <code class="docutils literal notranslate"><span class="pre">test_metrics()</span></code>.</p>
+<dl class="py method">
+<dt id="ml4sec.Assignment.test_metrics">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">test_metrics</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.test_metrics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test whether the computed metrics are correct.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="metric-implementations">
+<h2>Metric implementations<a class="headerlink" href="#metric-implementations" title="Permalink to this headline">¶</a></h2>
+<p>Based on the student impelmentations, we compute the following metrics:</p>
+<dl class="py method">
+<dt id="ml4sec.Assignment.TPR">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">TPR</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y_true</span></em>, <em class="sig-param"><span class="n">y_pred</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.TPR" title="Permalink to this definition">¶</a></dt>
+<dd><p>True positive rate.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ml4sec.Assignment.TNR">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">TNR</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y_true</span></em>, <em class="sig-param"><span class="n">y_pred</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.TNR" title="Permalink to this definition">¶</a></dt>
+<dd><p>True negative rate.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ml4sec.Assignment.FPR">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">FPR</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y_true</span></em>, <em class="sig-param"><span class="n">y_pred</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.FPR" title="Permalink to this definition">¶</a></dt>
+<dd><p>False positive rate.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ml4sec.Assignment.FNR">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">FNR</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y_true</span></em>, <em class="sig-param"><span class="n">y_pred</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.FNR" title="Permalink to this definition">¶</a></dt>
+<dd><p>False negative rate.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ml4sec.Assignment.accuracy">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">accuracy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y_true</span></em>, <em class="sig-param"><span class="n">y_pred</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accuracy.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ml4sec.Assignment.precision">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">precision</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y_true</span></em>, <em class="sig-param"><span class="n">y_pred</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.precision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Precision.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ml4sec.Assignment.recall">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">recall</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y_true</span></em>, <em class="sig-param"><span class="n">y_pred</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.recall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recall.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ml4sec.Assignment.f1_score">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">f1_score</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y_true</span></em>, <em class="sig-param"><span class="n">y_pred</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.f1_score" title="Permalink to this definition">¶</a></dt>
+<dd><p>F1-score.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="results">
+<h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h2>
+<p>We provide functions to compute all metrics, and show them using <code class="docutils literal notranslate"><span class="pre">show_report()</span></code>.</p>
+<dl class="py method">
+<dt id="ml4sec.Assignment.prediction_report">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">prediction_report</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y_true</span></em>, <em class="sig-param"><span class="n">y_pred</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.prediction_report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes prediction metrics and prints them.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_true</strong> (<em>array-like of shape=</em><em>(</em><em>n_samples</em><em>,</em><em>)</em>) – True values corresponding to each prediction.</p></li>
+<li><p><strong>y_pred</strong> (<em>array-like of shape=</em><em>(</em><em>n_samples</em><em>,</em><em>)</em>) – Predicted values corresponding to each true value.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ml4sec.Assignment.show_report">
+<code class="sig-prename descclassname">Assignment.</code><code class="sig-name descname">show_report</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tpr</span></em>, <em class="sig-param"><span class="n">tnr</span></em>, <em class="sig-param"><span class="n">fpr</span></em>, <em class="sig-param"><span class="n">fnr</span></em>, <em class="sig-param"><span class="n">accuracy</span></em>, <em class="sig-param"><span class="n">precision</span></em>, <em class="sig-param"><span class="n">recall</span></em>, <em class="sig-param"><span class="n">f1_score</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ml4sec.Assignment.show_report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints prediction report.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tpr</strong> (<em>float</em>) – True Positive Rate to show.</p></li>
+<li><p><strong>tnr</strong> (<em>float</em>) – True Negative Rate to show.</p></li>
+<li><p><strong>fpr</strong> (<em>float</em>) – False Positive Rate to show.</p></li>
+<li><p><strong>fnr</strong> (<em>float</em>) – False Negative Rate to show.</p></li>
+<li><p><strong>accuracy</strong> (<em>float</em>) – Accuracy to show.</p></li>
+<li><p><strong>precision</strong> (<em>float</em>) – Precision to show.</p></li>
+<li><p><strong>recall</strong> (<em>float</em>) – Recall to show.</p></li>
+<li><p><strong>f1_score</strong> (<em>float</em>) – F1-score to show.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="submit.html" class="btn btn-neutral float-right" title="Submit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="split.html" class="btn btn-neutral float-left" title="Split data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Thijs van Ede
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
